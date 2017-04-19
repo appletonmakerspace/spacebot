@@ -3,10 +3,14 @@ from slackbot.bot import listen_to
 from slackbot.bot import respond_to
 import socket
 
+help_text = '''
+!help - This help.\n
+!internet - Check if the Makerspace is online.\n
+'''
+
 @listen_to('!help')
 def help(message):
-    message.send('This is where the help will go.')
-    #message.react('+1')
+    message.send(help_text)
 
 @listen_to('!internet')
 def internet_status(message):
@@ -14,7 +18,7 @@ def internet_status(message):
         host = socket.gethostbyname('appletonmakerspace.asuscomm.com')
         port = 8443
         socket.create_connection((host, port), 1)
-        message.send(":smile: Makerspace is Online :) :smile:")
+        message.send(":smile: Makerspace is Online :smile:")
     except:
         message.send(":no_entry_sign: Makerspace is Offline :( :no_entry_sign:")
 
